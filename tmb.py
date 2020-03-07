@@ -3,10 +3,6 @@
 tmb = 0
 caloria = 0
 
-print("###########################")
-print("## Taxa Metabólica Basal ##")
-print("###########################")
-print()
 print("Qual seu sexo? (m/f)")
 sexo = input()
 print("Qual seu peso?")
