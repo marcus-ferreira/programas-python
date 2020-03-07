@@ -1,2 +1,2 @@
-# algoritmos-python
-Lista de algoritmos escritos em Python.
+# Algoritmos em Python
+Lista de algoritmos simples escritos em Python.
