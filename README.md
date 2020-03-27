@@ -5,4 +5,4 @@ Lista de algoritmos simples escritos em Python.
 
 [rendimentos.py](rendimentos.py) - Cálculo de juros compostos.
 
-[tmb.py](tmb.py) - Cálculo de Taxa Metabólica Basal (TMB) e gasto calórico.
+[nutricao.py](nutricao.py) - Input de dados para cálculos nutricionais.
