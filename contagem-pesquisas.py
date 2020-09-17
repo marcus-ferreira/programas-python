@@ -54,13 +54,7 @@ def program():
             break
 
     # Imprime os resultados
-    print("Atendimento médico")
-    print(q1)
-    print("\nInstalações da clínica")
-    print(q2)
-    print("\nRecomendação")
-    print(q3)
-    print()
+    print(f"Atendimento médico\n{q1}\nInstalações da clínica\n{q2}\nRecomendação\n{q3}\n")
 
     # Reinicia
     restart = input("Reiniciar? (s/n)\n")
