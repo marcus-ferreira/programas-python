@@ -1,4 +1,6 @@
 import tkinter as tk
+import pyodbc
+import pandas as pd
 from tkinter import ttk
 
 class App:
@@ -6,12 +8,14 @@ class App:
         self.create_window()
     
     def create_window(self):
-        window = tk.Tk()
-        window.title("Login")
-
+        # Functions
         def cadastrar():
             if entry1.get() != "" and entry2.get() != "":
-                usuarios[entry1.get()] = entry2.get()
+                cursor.execute(f'''
+                    INSERT INTO testDB.dbo.Users (Username, Password) 
+                    VALUES ('{entry1.get()}', '{entry2.get()}')
+                ''')
+                conn.commit()
                 label4.config(text="Usuário cadastrado!")
             else:
                 label4.config(text="Insira as informações corretas!")
@@ -20,16 +24,35 @@ class App:
 
         def logar():
             if entry1.get() != "" and entry2.get() != "":
-                if entry1.get() in usuarios and usuarios[entry1.get()] == entry2.get():
-                    label4.config(text="Login executado!")
-                else:
-                    label4.config(text="Senha incorreta!")
-            else:
-                label4.config(text="Insira as informações corretas!")
-            entry1.delete(0, "end")
-            entry2.delete(0, "end")
+                cursor.execute(f'''
+                    SELECT * FROM dbo.Users 
+                    WHERE Username='{entry1.get()}'
+                ''')
+                conn.commit()
 
-        usuarios = {}
+
+#                if entry1.get() in usuarios and usuarios[entry1.get()] == entry2.get():
+#                    label4.config(text="Login executado!")
+#                    entry1.delete(0, "end")
+#                    entry2.delete(0, "end")
+#                else:
+#                    label4.config(text="Senha incorreta!")
+#            else:
+#                label4.config(text="Insira as informações corretas!")
+
+        # Database
+        conn = pyodbc.connect(
+            'Driver={SQL Server};'
+            'Server=DESKTOP-R8IR9GU\SQLEXPRESS;'
+            'Database=testDB;'
+            'Trusted_Connection=yes;'
+        )
+        cursor = conn.cursor()
+
+
+        # GUI
+        window = tk.Tk()
+        window.title("Login")
 
         label1 = tk.Label(window, text="Login", font="Verdana 16 bold")
         label2 = tk.Label(window, text="Usuário:")
@@ -40,6 +63,7 @@ class App:
         button1 = tk.Button(window, text="Cadastrar", command=cadastrar)
         button2 = tk.Button(window, text="Entrar", command=logar)
 
+        # Grid
         label1.grid(row=0, column=0, columnspan=2, padx=2, pady=2)
         label2.grid(row=1, column=0, sticky="w")
         label3.grid(row=2, column=0, sticky="w")
