@@ -14,15 +14,13 @@ class App:
             ally = df["Aliado"][random.randint(0, 35)]
             complication = df["Complicação"][random.randint(0, 35)]
             lbl_result.config(text=f"Objetivo: {goal}\nLocal: {location}\nVilão: {villain}\nAliado(s): {ally}\nComplicação: {complication}")
-        
-
-        df = pd.read_csv("db.csv")
 
 
         # Gui
         window = tk.Tk()
-        window.title("Ajuda RPG")
-        window.resizable(False, False)
+        window.title("Gerador de Aventuras RPG")
+
+        df = pd.read_csv("db.csv")
 
         lbl_title = ttk.Label(window, text="Gerador de Aventuras", font="Helvetica 20 bold")
         btn_generate = ttk.Button(window, text="Gerar", command=generate)

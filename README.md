@@ -1,8 +1,10 @@
-# Algoritmos em Python
-Lista de programas simples escritos em Python utilizando a biblioteca tkinter.
+# Python programs
+List of simple programs written with Python using tkinter library.
 
-[contagem-pesquisas.py](contagem-pesquisas.py) - Contagem de dados em pesquisa quantitativa.
+[survey-count.py](survey-count.py) - Quantity survey data count.
 
-[login.py](login.py) - Exemplo para cadastro e login.
+[login.py](login.py) - Sign up and sign in example with MS SQL Server integration.
 
-[rendimentos.py](rendimentos.py) - Cálculo de juros compostos.
+[investiments.py](investiments.py) - Compound interest calculation.
+
+[rpg_generator.py](rpg_generator.py) - RPG adventure generator.
