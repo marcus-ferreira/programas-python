@@ -6,34 +6,33 @@ from tkinter import ttk
 class App:
     def __init__(self):
         # Functions
-        def cadastrar():
-            if entry1.get() != "" and entry2.get() != "":
-                cursor.execute(f'''
-                    IF NOT EXISTS 
-                        (SELECT * FROM [dbo].[Users] 
-                        WHERE Username = '{entry1.get()}') 
-                            INSERT INTO testDB.dbo.Users(Username, Password) 
-                            VALUES ('{entry1.get()}', '{entry2.get()}')
-                ''')
-                conn.commit()
-                label4.config(text="Usuário cadastrado!")
-            else:
-                label4.config(text="Insira as informações corretas!")
-            entry1.delete(0, "end")
-            entry2.delete(0, "end")
-
-        def logar():
-            if entry1.get() != "" and entry2.get() != "":
-                query = f"SELECT * FROM [dbo].[Users] WHERE Username = '{entry1.get()}' AND Password = '{entry2.get()}'"
+        def signup():
+            if ent_username.get() != "" and ent_password.get() != "":
+                query = f"SELECT * FROM [dbo].[Users] WHERE Username = '{ent_username.get()}'"
                 df = pd.read_sql(query, conn)
-                if df["Username"][0] == entry1.get() and df["Password"][0] == entry2.get():
-                    label4.config(text="Login executado!")
-                    entry1.delete(0, "end")
-                    entry2.delete(0, "end")
+                if not df["Username"].any():
+                    cursor.execute(f'''INSERT INTO testDB.dbo.Users(Username, Password) VALUES ('{ent_username.get()}', '{ent_password.get()}')''')
+                    conn.commit()
+                    lbl_info.config(text="Usuário cadastrado!")
                 else:
-                    label4.config(text="Senha incorreta!")
+                    lbl_info.config(text="Usuário já existe no sistema!")
             else:
-                label4.config(text="Insira as informações corretas!")
+                lbl_info.config(text="Insira as informações corretas!")
+            ent_username.delete(0, "end")
+            ent_password.delete(0, "end")
+
+        def login():
+            if ent_username.get() != "" and ent_password.get() != "":
+                query = f"SELECT * FROM [dbo].[Users] WHERE Username = '{ent_username.get()}' AND Password = '{ent_password.get()}'"
+                df = pd.read_sql(query, conn)
+                if df["Username"][0] == ent_username.get() and df["Password"][0] == ent_password.get():
+                    lbl_info.config(text="Login executado!")
+                    ent_username.delete(0, "end")
+                    ent_password.delete(0, "end")
+                else:
+                    lbl_info.config(text="Senha incorreta!")
+            else:
+                lbl_info.config(text="Insira as informações corretas!")
 
 
         # Database
@@ -43,27 +42,27 @@ class App:
 
         # GUI
         window = tk.Tk()
-        window.title("Login")
+        window.title("Sign up / Log in Example")
 
-        label1 = tk.Label(window, text="Login", font="Verdana 16 bold")
-        label2 = tk.Label(window, text="Usuário:")
-        entry1 = tk.Entry(window)
-        label3 = tk.Label(window, text="Senha:")
-        entry2 = tk.Entry(window, show="*")
-        button1 = tk.Button(window, text="Cadastrar", command=cadastrar)
-        button2 = tk.Button(window, text="Entrar", command=logar)
-        label4 = tk.Label(window, text="")
+        lbl_title = tk.Label(window, text="Login", font="Verdana 16 bold")
+        lbl_username = tk.Label(window, text="Usuário:")
+        ent_username = tk.Entry(window)
+        lbl_password = tk.Label(window, text="Senha:")
+        ent_password = tk.Entry(window, show="*")
+        btn_signup = tk.Button(window, text="signup", command=signup)
+        btn_login = tk.Button(window, text="Entrar", command=login)
+        lbl_info = tk.Label(window, text="")
 
 
         # Grid
-        label1.grid(row=0, column=0, columnspan=2, padx=2, pady=2)
-        label2.grid(row=1, column=0, sticky="w")
-        entry1.grid(row=1, column=1, padx=2, pady=2)
-        label3.grid(row=2, column=0, sticky="w")
-        entry2.grid(row=2, column=1, padx=2, pady=2)
-        button1.grid(row=3, column=0, sticky="we", columnspan=2, padx=2, pady=2)
-        button2.grid(row=4, column=0, sticky="we", columnspan=2, padx=2, pady=2)
-        label4.grid(row=5, column=0, columnspan=2)
+        lbl_title.grid(row=0, column=0, columnspan=2, padx=2, pady=2)
+        lbl_username.grid(row=1, column=0, sticky="w")
+        ent_username.grid(row=1, column=1, padx=2, pady=2)
+        lbl_password.grid(row=2, column=0, sticky="w")
+        ent_password.grid(row=2, column=1, padx=2, pady=2)
+        btn_signup.grid(row=3, column=0, sticky="we", columnspan=2, padx=2, pady=2)
+        btn_login.grid(row=4, column=0, sticky="we", columnspan=2, padx=2, pady=2)
+        lbl_info.grid(row=5, column=0, columnspan=2)
 
 
         window.mainloop()
