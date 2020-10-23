@@ -24,7 +24,7 @@ class App:
 
         lbl_title = ttk.Label(window, text="Gerador de Aventuras", font="Helvetica 20 bold")
         btn_generate = ttk.Button(window, text="Gerar", command=generate)
-        lbl_result = ttk.Label(window)
+        lbl_result = ttk.Label(window, width=100)
 
 
         # Grid
