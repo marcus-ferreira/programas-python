@@ -5,7 +5,6 @@ from tkinter import ttk
 
 class App:
     def __init__(self):
-        # Functions
         def signup():
             if ent_username.get() != "" and ent_password.get() != "":
                 query = f"SELECT * FROM [dbo].[Users] WHERE Username = '{ent_username.get()}'"
@@ -34,11 +33,9 @@ class App:
             else:
                 lbl_info.config(text="Insira as informações corretas!")
 
-
         # Database
         conn = pyodbc.connect('DRIVER={SQL Server}; SERVER=<server_name>; DATABASE=<database_name>; Trusted_Connection=yes;')
         cursor = conn.cursor()
-
 
         # GUI
         window = tk.Tk()
@@ -53,8 +50,6 @@ class App:
         btn_login = tk.Button(window, text="Entrar", command=login)
         lbl_info = tk.Label(window, text="")
 
-
-        # Grid
         lbl_title.grid(row=0, column=0, columnspan=2, padx=2, pady=2)
         lbl_username.grid(row=1, column=0, sticky="w")
         ent_username.grid(row=1, column=1, padx=2, pady=2)
@@ -64,8 +59,6 @@ class App:
         btn_login.grid(row=4, column=0, sticky="we", columnspan=2, padx=2, pady=2)
         lbl_info.grid(row=5, column=0, columnspan=2)
 
-
         window.mainloop()
-
 
 App()

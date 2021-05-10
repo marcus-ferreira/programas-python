@@ -1,10 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 
-
 class App:
     def __init__(self):
-        # Functions
         def add(r1, r2, r3):
             try: 
                 if r1 != 0 and r2 != 0 and r3 != 0:
@@ -25,7 +23,6 @@ class App:
             r2.set(None)
             r3.set(None)
             text_resultado.config(text=f"Como você classifica o atendimento médico da clínica?\n{q1}\n\nComo você classifica as instalações da clínica com relação ao espaço físico e conforto?\n{q2}\n\nVocê recomendaria a clínica para colegas de trabalho ou outras empresas?\n{q3}\n")
-
 
         # GUI
         window = tk.Tk()
@@ -59,8 +56,6 @@ class App:
         button_add = tk.Button(window, text="Adicionar", command=lambda: add(r1.get(), r2.get(), r3.get()))
         button_clear = tk.Button(window, text="Limpar", command=clear)
 
-
-        # Grid
         lbl_frame1.grid(row=0, column=0, padx=10, pady=10)
         label_q1.grid(row=0, column=0, sticky="w")
         radio_q1_r1.grid(row=1, column=0, sticky="w")
@@ -82,8 +77,6 @@ class App:
         button_add.grid(row=1, column=0, padx=10, pady=10)
         button_clear.grid(row=1, column=1, padx=10, pady=10)
 
-
         window.mainloop()
-
 
 App()
