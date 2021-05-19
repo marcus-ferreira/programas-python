@@ -1,5 +1,7 @@
+# Contador de pesquisas de satisfação
+
 import tkinter as tk
-from tkinter import ttk
+
 
 class App:
     def __init__(self):
@@ -9,11 +11,20 @@ class App:
                     q1[r1 - 1][1] += 1
                     q2[r2 - 1][1] += 1
                     q3[r3 - 1][1] += 1
-                    text_resultado.config(text=f"Como você classifica o atendimento médico da clínica?\n{q1}\n\nComo você classifica as instalações da clínica com relação ao espaço físico e conforto?\n{q2}\n\nVocê recomendaria a clínica para colegas de trabalho ou outras empresas?\n{q3}\n")
+                    text_resultado.config(text=f'''Como você classifica o atendimento médico da clínica?
+                    {q1}
+                    
+                    Como você classifica as instalações da clínica com relação ao espaço físico e conforto?
+                    {q2}
+                    
+                    Você recomendaria a clínica para colegas de trabalho ou outras empresas?
+                    {q3}
+                    ''')
                 else:
                     text_resultado.config(text="Escolha os valores corretamente!")
             except:
                 text_resultado.config(text="Escolha os valores corretamente!")
+
 
         def clear():
             q1[0][1], q1[1][1], q1[2][1], q1[3][1] = 0, 0, 0, 0
@@ -22,7 +33,16 @@ class App:
             r1.set(None)
             r2.set(None)
             r3.set(None)
-            text_resultado.config(text=f"Como você classifica o atendimento médico da clínica?\n{q1}\n\nComo você classifica as instalações da clínica com relação ao espaço físico e conforto?\n{q2}\n\nVocê recomendaria a clínica para colegas de trabalho ou outras empresas?\n{q3}\n")
+            text_resultado.config(text=f'''Como você classifica o atendimento médico da clínica?
+            {q1}
+            
+            Como você classifica as instalações da clínica com relação ao espaço físico e conforto?
+            {q2}
+            
+            Você recomendaria a clínica para colegas de trabalho ou outras empresas?
+            {q3}
+            ''')
+
 
         # GUI
         window = tk.Tk()
@@ -51,7 +71,15 @@ class App:
         radio_q3_r2 = tk.Radiobutton(lbl_frame1, text="Não", variable=r3, value=2)
 
         lbl_frame2 = tk.LabelFrame(window)
-        text_resultado = tk.Label(lbl_frame2, text=f"Como você classifica o atendimento médico da clínica?\n{q1}\n\nComo você classifica as instalações da clínica com relação ao espaço físico e conforto?\n{q2}\n\nVocê recomendaria a clínica para colegas de trabalho ou outras empresas?\n{q3}\n")
+        text_resultado = tk.Label(lbl_frame2, text=f'''Como você classifica o atendimento médico da clínica?
+        {q1}
+        
+        Como você classifica as instalações da clínica com relação ao espaço físico e conforto?
+        {q2}
+        
+        Você recomendaria a clínica para colegas de trabalho ou outras empresas?
+        {q3}
+        ''')
 
         button_add = tk.Button(window, text="Adicionar", command=lambda: add(r1.get(), r2.get(), r3.get()))
         button_clear = tk.Button(window, text="Limpar", command=clear)
@@ -78,5 +106,6 @@ class App:
         button_clear.grid(row=1, column=1, padx=10, pady=10)
 
         window.mainloop()
+
 
 App()

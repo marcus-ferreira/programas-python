@@ -1,19 +1,24 @@
+# Banco de dados alimentícios
+
 import tkinter as tk
 import pandas as pd
 from tkinter import ttk
+
 
 class App:
     def __init__(self):
         window = tk.Tk()
         window.title("TacoDex")
 
-        df = pd.read_csv("taco_db.csv")
+        df = pd.read_csv("tacodex_db.csv")
+
 
         def choose():
             product = cbx_products.get()
             df_ = df.loc[df["Descrição"] == product]
             df_ = df_.iloc[0].to_string()
             lbl_text.config(text=f"{df_}", justify="right")
+
 
         # GUI
         df = df.sort_values(["Descrição"])

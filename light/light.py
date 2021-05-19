@@ -1,6 +1,8 @@
+# Cálculo de conta de luz
+
 import tkinter as tk
-from tkinter import ttk
 from PIL import Image, ImageTk
+
 
 class App:
     def __init__(self):
@@ -16,6 +18,7 @@ class App:
                 resultado.config(text=f"Valor estimado a pagar:\nBandeira Verde: R$ {round(green_flag_price, 2)}\nBandeira Amarela: R$ {round(yellow_flag_price, 2)}\nBandeira Vermelha: R$ {round(red_flag_price, 2)}")
             except:
                 resultado.config(text=f"Insira os valores corretamente!")
+
 
         # GUI
         window = tk.Tk()
@@ -47,5 +50,6 @@ class App:
         resultado.grid(row=4)
 
         window.mainloop()
+
 
 App()

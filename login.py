@@ -1,7 +1,9 @@
+# Login utilizando SQL Server
+
 import tkinter as tk
 import pyodbc
 import pandas as pd
-from tkinter import ttk
+
 
 class App:
     def __init__(self):
@@ -20,6 +22,7 @@ class App:
             ent_username.delete(0, "end")
             ent_password.delete(0, "end")
 
+
         def login():
             if ent_username.get() != "" and ent_password.get() != "":
                 query = f"SELECT * FROM [dbo].[Users] WHERE Username = '{ent_username.get()}' AND Password = '{ent_password.get()}'"
@@ -32,6 +35,7 @@ class App:
                     lbl_info.config(text="Senha incorreta!")
             else:
                 lbl_info.config(text="Insira as informações corretas!")
+
 
         # Database
         conn = pyodbc.connect('DRIVER={SQL Server}; SERVER=<server_name>; DATABASE=<database_name>; Trusted_Connection=yes;')
@@ -60,5 +64,6 @@ class App:
         lbl_info.grid(row=5, column=0, columnspan=2)
 
         window.mainloop()
+
 
 App()
